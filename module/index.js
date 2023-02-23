@@ -4,7 +4,7 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-
+import apiRoute from './routes/api/index.js';
 import mongoose from 'mongoose';
 const app = express();
 export default class application {
@@ -13,6 +13,7 @@ export default class application {
     this.setUpExpress();
     this.setUpMongoose();
     this.setConfig();
+    this.setRoutes();
   }
   setUpExpress(){
     const server=http.createServer(app);
@@ -31,6 +32,9 @@ export default class application {
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(bodyParser.json());
     app.use(cookieParser());
+  }
+  setRoutes(){
+    app.use('/api',apiRoute);
   }
   
 }
