@@ -24,9 +24,15 @@ export default new class authController extends controller {
 
       newUser.save();
 
-      res.status(200).json({
-        status: 'success',
-        user: new userTransform().transform(newUser, true)
+      const data=new userTransform().transform(newUser,true);
+
+      res.cookie("pro_token",data.token,{
+        httpOnly:true,
+        maxAge:(3600*24*10),
+        path:"/"
+      }).status(200).json({
+        status:'success',
+        user:data
       })
 
 
@@ -37,6 +43,9 @@ export default new class authController extends controller {
   async login(req, res, next) {
     try {
 
+      if(await this.RecaptchaVrify(req,res,next)) return;
+      if(this.validationData(req,res))return;
+
       const user = await User.findOne({ email: req.body.email });
 
       if (!user || !user.comparePassword(req.body.password)) return res.status(422).json({
@@ -45,11 +54,16 @@ export default new class authController extends controller {
       });
 
 
-      res.status(422).json({
-        status: 'success',
-        user: new userTransform().transform(user, true)
-      })
+      const data=new userTransform().transform(user,true);
 
+      res.cookie("pro_token",data.token,{
+        httpOnly:true,
+        maxAge:(3600*24*10),
+        path:"/"
+      }).status(200).json({
+        status:'success',
+        user:data
+      })
 
 
 

@@ -19,7 +19,7 @@ export default class userTransform extends Transform {
 
     if(this.createStatusToken){
       let token=jwt.sign({user_id:item._id,},process.env.JWT_KEY,{
-        expiresIn:'2 days'
+        expiresIn:'10 days'
       });
 
       return {

@@ -6,6 +6,9 @@ const router=Router();
 import authRoute from './auth.js';
 router.use('/auth',authRoute);
 
+// home Route
+import homeRoute from './home.js';
 
+router.use('/',homeRoute);
 
 export default router;
