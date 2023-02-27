@@ -27,7 +27,11 @@ export default class application {
     .catch(()=>console.log('Error connecting to db!'));
   }
   setConfig(){
-    app.use(cors());
+    app.use(cors({
+      origin:['http://localhost:3000'],
+      methods:['GET','POST','DELETE','PUT'],
+      credentials:true
+    }));
     app.use('/static',express.static('public'));
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(bodyParser.json());
