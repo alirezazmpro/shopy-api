@@ -58,7 +58,7 @@ export default new class authController extends controller {
 
       res.cookie("pro_token",data.token,{
         httpOnly:true,
-        maxAge:(3600*24*10),
+        maxAge:(3600*24*100),
         path:"/"
       }).status(200).json({
         status:'success',

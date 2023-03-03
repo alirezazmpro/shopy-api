@@ -9,6 +9,7 @@ export default class userTransform extends Transform {
       id:item._id,
       name:item.name,
       email:item.email,
+      admin:item.admin,
       ...this.withToken(item)
     }
   }
