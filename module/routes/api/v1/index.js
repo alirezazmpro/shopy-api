@@ -11,4 +11,9 @@ import homeRoute from './home.js';
 
 router.use('/',homeRoute);
 
+
+// Admin Route
+import adminRoute from './admin.js';
+
+router.use('/admin',adminRoute);
 export default router;

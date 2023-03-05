@@ -1,5 +1,5 @@
 import mongoose  from "mongoose";
-
+import  mongoosePaginate   from "mongoose-paginate";
 
 const Schema=mongoose.Schema;
 
@@ -16,5 +16,6 @@ const courseSchema=new Schema({
   commentCount:{type:Number,default:0},
 },{timestamps:true});
 
+courseSchema.plugin(mongoosePaginate)
 
 export default mongoose.model('Course',courseSchema);
