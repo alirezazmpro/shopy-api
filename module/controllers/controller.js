@@ -55,4 +55,8 @@ export default class controller {
     }
   }
 
+  slug(title) {
+    return title.replace(/([^۰-۹آ-یa-z0-9]|-)+/g, "-")
+  }
+
 }

@@ -1,6 +1,6 @@
 
 import Transform from "../transform.js";
-
+import userTransform from './userTransform.js'
 export default class courseTransform extends Transform{
 
 
@@ -18,8 +18,23 @@ export default class courseTransform extends Transform{
       commentCount:item.commentCount,
       createdAt:item.createdAt,
       updateAt:item.updateAt,
+      ...this.showUser(item)
 
     }
+  }
+
+  showUser(item){
+    if(this.WithUserStatus){
+
+      return {
+        user:new userTransform().transform(item.user)
+      }
+    }
+    return {}
+  }
+  withUser(){
+    this.WithUserStatus=true;
+    return this;
   }
   
 }
