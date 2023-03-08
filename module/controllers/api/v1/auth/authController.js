@@ -6,7 +6,6 @@ export default new class authController extends controller {
 
   async register(req, res, next) {
     try {
-      if (await this.RecaptchaVrify(req, res, next)) return;
       if (this.validationData(req, res)) return;
 
       const user = await User.findOne({ email: req.body.email });
@@ -28,7 +27,7 @@ export default new class authController extends controller {
 
       res.cookie("pro_token",data.token,{
         httpOnly:true,
-        maxAge:(3600*24*10),
+        maxAge:(3600*1000*24*90),
         path:"/"
       }).status(200).json({
         status:'success',
@@ -43,7 +42,7 @@ export default new class authController extends controller {
   async login(req, res, next) {
     try {
 
-      if(await this.RecaptchaVrify(req,res,next)) return;
+     
       if(this.validationData(req,res))return;
 
       const user = await User.findOne({ email: req.body.email });
@@ -58,7 +57,7 @@ export default new class authController extends controller {
 
       res.cookie("pro_token",data.token,{
         httpOnly:true,
-        maxAge:(3600*24*100),
+        maxAge:(3600*1000*24*90),
         path:"/"
       }).status(200).json({
         status:'success',

@@ -27,4 +27,7 @@ convertFileToField.handle,
 courseValidator.handle(),
 courseController.store);
 
+//delete course
+router.delete('/courses/:id',courseController.destroy)
+
 export default router;

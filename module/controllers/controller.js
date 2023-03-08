@@ -1,6 +1,7 @@
 import autoBind from 'auto-bind';
 import { validationResult } from 'express-validator';
 import axios from 'axios';
+import isMongoId from 'validator/lib/isMongoId.js'
 export default class controller {
 
   constructor() {
@@ -53,6 +54,20 @@ export default class controller {
     } catch (err) {
       next(err);
     }
+  }
+
+  hasMongoID(res,params){
+    if(!isMongoId(params)){
+       this.error(res,401,'ایدی مورد نطر اعتبار ندارد')
+      
+    }
+  }
+
+  error(res,code,message){
+    return res.status(code).json({
+      status:'fail',
+      message
+    })
   }
 
   slug(title) {
